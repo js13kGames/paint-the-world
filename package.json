@@ -1,0 +1,23 @@
+{
+    "name": "game",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "node scripts/build.js",
+        "start": "live-server src --port=3000 --no-browser"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "adm-zip": "^0.6.0",
+        "html-minifier-terser": "^7.2.0",
+        "inline-source": "^8.0.3",
+        "serve": "^14.2.6"
+    },
+    "dependencies": {
+        "live-server": "^1.2.2",
+        "terser": "^5.51.2"
+    }
+}

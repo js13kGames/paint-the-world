@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>rainbow</title>
+        <style>
+            #c {
+                image-rendering: pixelated;
+                position: absolute;
+                width: 640px;
+                height: 360px;
+                left: 50%;
+                transform-origin: top left;
+            }
+            #fail {
+                position: absolute;
+                background-color: black;
+                border: white 3px solid;
+                color: white;
+                padding: 100px 200px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                display: none;
+            }
+            #fail h1 {
+                margin: 10px;
+            }
+            #fail button {
+                padding: 10px 30px;
+                font-size: 30px;
+                margin: 30px;
+            }
+        </style>
+    </head>
+    <body style="margin: 0">
+        <canvas width="640" height="360" id="c"></canvas>
+        <script src="core/Ease.js"></script>
+        <script src="core/Tween.js"></script>
+        <script src="core/engine.js"></script>
+        <script src="main.js"></script>
+        <div id="fail">
+            <h1>You Failed</h1>
+            <button onclick="window.location.reload()">Restart</button>
+        </div>
+    </body>
+</html>
