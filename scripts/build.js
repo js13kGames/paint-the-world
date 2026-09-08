@@ -78,9 +78,21 @@ async function build() {
         },
         mangle: {
             toplevel: true,
+            reserved: [
+                "Handle1",
+                "Handle2",
+                "Handle3",
+                "Handle4",
+                "Hangle5",
+                "Handle6",
+                "Hangle7",
+                "Hangle8",
+                "Hangle9",
+                "Handle10",
+            ],
             properties: {
                 regex: /.*/,
-                reserved: ["Space", "Enter", "Shift", "Ctrl", "Alt", "Handle1", "Handle2", "Handle3", "Handle4", "Hangle5", "Handle6", "Hangle7", "Hangle8", "Hangle9", "Handle10"],
+                reserved: ["Space", "Enter", "Shift", "Ctrl", "Alt"],
             },
         },
         format: {

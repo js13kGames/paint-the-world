@@ -194,10 +194,10 @@ class Player extends Obj {
             "assets/unicorn8.png",
             "assets/unicorn2.png",
             "assets/unicorn3.png",
-            "assets/unicorn4.png",
+            "assets/unicorn4.png",// mark
             "assets/unicorn5.png",
             "assets/unicorn6.png",
-            "assets/unicorn7.png",
+            "assets/unicorn7.png",// mark
         ]);
         this.size = [64, 64];
         this.collSize = [32, 32];
@@ -300,7 +300,7 @@ class Player extends Obj {
         });
     }
     DoubleJump() {
-        if(!this.canDouble){
+        if (!this.canDouble) {
             return;
         }
         if (!this.isDoubled) return;
@@ -404,21 +404,6 @@ conf.drawBackground = () => {
         c.save();
         c.translate(parallaxX * 0.3, parallaxY * 0.2);
 
-        function GetMountainHeight(worldX) {
-            const freq1 = ((2 * Math.PI) / layerSize) * 2;
-            const freq2 = ((2 * Math.PI) / layerSize) * 5;
-            const freq3 = ((2 * Math.PI) / layerSize) * 11;
-            const freq4 = ((2 * Math.PI) / layerSize) * 7;
-
-            return (
-                height * 0.65 -
-                Math.sin(worldX * freq1 + 1) * 30 -
-                Math.sin(worldX * freq2 + 3) * 15 -
-                Math.sin(worldX * freq3 + 5) * 20 -
-                Math.sin(worldX * freq4 + 7) * 10
-            );
-        }
-
         const worldOffset =
             (((parallaxX * 0.3) % layerSize) + layerSize) % layerSize;
 
@@ -431,8 +416,13 @@ conf.drawBackground = () => {
             c.moveTo(startX, height);
 
             for (let x = startX; x <= endX; x += 2) {
-                const worldX = x;
-                const y = GetMountainHeight(worldX);
+                let a = x * ((2 * Math.PI) / layerSize);
+                const y =
+                    height * 0.65 -
+                    Math.sin(a * 2 + 1) * 30 -
+                    Math.sin(a * 5 + 3) * 15 -
+                    Math.sin(a * 11 + 5) * 20 -
+                    Math.sin(a * 7 + 7) * 10;
                 c.lineTo(x, y);
             }
             c.lineTo(endX, height);
@@ -464,9 +454,9 @@ conf.drawBackground = () => {
             sunY,
             sunRadius * 2.5
         );
-        glow.addColorStop(0, "rgba(255, 220, 50, 0.4)");
-        glow.addColorStop(0.5, "rgba(255, 200, 50, 0.1)");
-        glow.addColorStop(1, "rgba(255, 200, 50, 0)");
+        glow.addColorStop(0, "#FFDC3211");
+        glow.addColorStop(0.5, "#FFC83222");
+        glow.addColorStop(1, "#00000000");
         c.fillStyle = glow;
         c.beginPath();
         c.arc(sunX, sunY, sunRadius * 2.5, 0, Math.PI * 2);
@@ -490,16 +480,6 @@ conf.drawBackground = () => {
 
         c.save();
         c.translate(sunX, sunY);
-        for (let i = 0; i < 12; i++) {
-            c.rotate(Math.PI / 12);
-            c.beginPath();
-            c.moveTo(sunRadius * 1.1, 0);
-            c.lineTo(sunRadius * 1.4, -sunRadius * 0.08);
-            c.lineTo(sunRadius * 1.4, sunRadius * 0.08);
-            c.closePath();
-            c.fillStyle = "rgba(255, 200, 50, 0.3)";
-            c.fill();
-        }
         c.restore();
     }
 
@@ -513,38 +493,16 @@ conf.drawBackground = () => {
             { x: 0.08, y: 0.12, scale: 0.2, layer: 0 },
             { x: 0.15, y: 0.03, scale: 0.3, layer: 0 },
             { x: 0.22, y: 0.18, scale: 0.22, layer: 0 },
-            { x: 0.3, y: 0.08, scale: 0.28, layer: 0 },
-            { x: 0.38, y: 0.02, scale: 0.18, layer: 0 },
-            { x: 0.45, y: 0.15, scale: 0.25, layer: 0 },
-            { x: 0.52, y: 0.06, scale: 0.2, layer: 0 },
-            { x: 0.6, y: 0.2, scale: 0.3, layer: 0 },
-            { x: 0.68, y: 0.04, scale: 0.22, layer: 0 },
-            { x: 0.75, y: 0.14, scale: 0.18, layer: 0 },
-            { x: 0.82, y: 0.08, scale: 0.28, layer: 0 },
-            { x: 0.9, y: 0.02, scale: 0.25, layer: 0 },
-            { x: 0.97, y: 0.16, scale: 0.2, layer: 0 },
 
             { x: 0.04, y: 0.2, scale: 0.4, layer: 1 },
             { x: 0.12, y: 0.08, scale: 0.45, layer: 1 },
             { x: 0.2, y: 0.25, scale: 0.35, layer: 1 },
             { x: 0.28, y: 0.12, scale: 0.5, layer: 1 },
-            { x: 0.36, y: 0.22, scale: 0.38, layer: 1 },
-            { x: 0.44, y: 0.05, scale: 0.42, layer: 1 },
-            { x: 0.52, y: 0.18, scale: 0.48, layer: 1 },
-            { x: 0.6, y: 0.1, scale: 0.35, layer: 1 },
-            { x: 0.68, y: 0.24, scale: 0.4, layer: 1 },
-            { x: 0.76, y: 0.06, scale: 0.45, layer: 1 },
-            { x: 0.84, y: 0.2, scale: 0.38, layer: 1 },
-            { x: 0.92, y: 0.1, scale: 0.42, layer: 1 },
 
             { x: 0.06, y: 0.28, scale: 0.6, layer: 2 },
             { x: 0.18, y: 0.15, scale: 0.55, layer: 2 },
             { x: 0.3, y: 0.3, scale: 0.65, layer: 2 },
             { x: 0.42, y: 0.1, scale: 0.5, layer: 2 },
-            { x: 0.54, y: 0.25, scale: 0.6, layer: 2 },
-            { x: 0.66, y: 0.12, scale: 0.55, layer: 2 },
-            { x: 0.78, y: 0.28, scale: 0.65, layer: 2 },
-            { x: 0.9, y: 0.15, scale: 0.5, layer: 2 },
         ];
 
         const layers = [

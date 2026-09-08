@@ -16,7 +16,7 @@ class PhysicsSystem {
             o.vx = 0;
             o.vy = 0;
             o.mxSpd = conf.mxSpd || 20;
-        }else{
+        } else {
             o.trigger = true;
         }
         this.objs.push(o);
@@ -59,19 +59,28 @@ class PhysicsSystem {
         let p = { ...o };
         p.x = x;
         p.y = y;
+        let tx = o.vx;
+        let ty = o.vy;
+        const bs = (a)=>Math.abs(a)
+        const mn = (a,b) => {
+            if(bs(a) < bs(b)) return a;
+            return b;
+        }
         for (let u of this.objs) {
             if (o.id == u.id) continue;
             if (u.rem) continue;
 
             if (BBC(p, u)) {
-                return this.CheckColl(u, o);
+                let t = this.CheckColl(u, o);
+                tx = mn(tx, t[0]);
+                ty = mn(ty, t[1]);
             }
         }
 
-        return [o.vx, o.vy];
+        return [tx, ty];
     }
     CheckColl(u, b) {
-        if(u.trigger) {
+        if (u.trigger) {
             b.Trigger(u);
             return [b.vx, b.vy];
         }
