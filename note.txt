@@ -1,0 +1,7 @@
+red:
+orange:
+yellow:
+green:
+lightblue:
+blue:
+purple:
