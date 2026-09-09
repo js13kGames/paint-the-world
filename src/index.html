@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>rainbow</title>
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23666'/></svg>"
+        />
         <style>
             #c {
                 image-rendering: pixelated;
@@ -79,7 +82,6 @@
     </head>
     <body style="margin: 0">
         <canvas width="640" height="360" id="c"></canvas>
-        <script src="main.js"></script>
         <div id="fail" class="p">
             <h1>😢 You Failed</h1>
             <button onclick="PlayerReset()">Try Again (R)</button>
@@ -127,6 +129,5 @@
             <p>You can jump on water.</p>
             <button onclick="Off('c6')">ok (E)</button>
         </div>
-        
     </body>
 </html>
