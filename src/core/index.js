@@ -1,16 +1,16 @@
-const KEYS = {};
-for(let i = 0; i < 256; i++) {
-    KEYS[String.fromCharCode(i)] = i
-}
-console.log(KEYS);
-
+import { AlignWindow, Clear, conf } from "./engine";
+import { PhysicsSystem } from "./physics";
 function Init() {
     AlignWindow();
 
     document.addEventListener("keydown", (e) => {
-        let name = e.key;
+
+
+        let name = e.key.toLowerCase();
+
+
         if (e.key == " ") {
-            name = "Space";
+            name = "space";
         }
         if (conf.pressed[name]) return;
         conf.pressed[name] = true;
@@ -18,16 +18,16 @@ function Init() {
     });
 
     document.addEventListener("keyup", (e) => {
-        let name = e.key;
+        let name = e.key.toLowerCase();
         if (e.key == " ") {
-            name = "Space";
+            name = "space";
         }
         conf.pressed[name] = false;
         conf.keys[name] = -1;
     });
 }
 
-let physics = new PhysicsSystem();
+export let physics = new PhysicsSystem();
 
 function Update() {
     if (!conf.pause) {
@@ -49,5 +49,7 @@ function Update() {
     requestAnimationFrame(Update);
 }
 
-Init();
-Update();
+export function Start() {
+    Init();
+    Update();
+}

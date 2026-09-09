@@ -1,4 +1,4 @@
-let conf = {
+export let conf = {
     w: 640,
     h: 360,
     objs: [],
@@ -9,18 +9,18 @@ let conf = {
     drawBackground: () => {},
 };
 
-let canvas = Get("c");
-let c = canvas.getContext("2d");
+export let canvas = Get("c");
+export let c = canvas.getContext("2d");
 c.imageSmoothingEnabled = false;
 c.mozImageSmoothingEnabled = false;
 c.webkitImageSmoothingEnabled = false;
 c.msImageSmoothingEnabled = false;
 
-function Get(id) {
+export function Get(id) {
     return document.getElementById(id);
 }
 
-function AlignWindow() {
+export function AlignWindow() {
     let width = window.innerWidth;
     let height = window.innerHeight;
     let scale = 1;
@@ -39,16 +39,16 @@ class Camera {
     y = 0;
     zoom = 1;
 }
-let camera = new Camera();
+export let camera = new Camera();
 
-function Clear() {
+export function Clear() {
     c.fillStyle = conf.background;
     c.fillRect(0, 0, canvas.width, canvas.height);
     conf.drawBackground();
 }
 
 let objID = 0;
-class Obj {
+export class Obj {
     name = "obj";
     x = 0;
     y = 0;
@@ -144,7 +144,7 @@ class Obj {
     }
     After() {}
 }
-function BBC(a, b) {
+export function BBC(a, b) {
     let halfA = a.collSize;
     let halfB = b.collSize;
 

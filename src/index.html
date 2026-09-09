@@ -79,15 +79,10 @@
     </head>
     <body style="margin: 0">
         <canvas width="640" height="360" id="c"></canvas>
-        <script src="core/Ease.js"></script>
-        <script src="core/Tween.js"></script>
-        <script src="core/engine.js"></script>
-        <script src="core/physics.js"></script>
-        <script src="core/index.js"></script>
         <script src="main.js"></script>
         <div id="fail" class="p">
             <h1>😢 You Failed</h1>
-            <button onclick="Handle1()"> Try Again</button>
+            <button onclick="PlayerReset()">Try Again (R)</button>
         </div>
 
         <div id="complete" class="p">
@@ -97,39 +92,41 @@
                 <strong>The world is radiant because of you</strong> — now you
                 can wander freely and <span>enjoy every view</span>.
             </p>
-            <button onclick="Handle2('complete')"> Stay Here</button>
-            <button onclick="window.location.reload()"> Restart Game</button>
+            <button onclick="Off('complete')">Stay Here</button>
+            <button onclick="window.location.reload()">Restart Game</button>
         </div>
 
         <div id="c1" class="p">
             <h1 style="color: red">Red Color unlocked</h1>
             <p>There are many platforms.</p>
-            <button onclick="Handle2('c1')"> ok</button>
+            <button onclick="Off('c1')">ok (E)</button>
         </div>
         <div id="c2" class="p">
             <h1 style="color: orange">Orange Color unlocked</h1>
             <p>Your speed is increased</p>
-            <button onclick="Handle2('c2')"> ok</button>
+            <button onclick="Off('c2')">ok (E)</button>
         </div>
         <div id="c3" class="p">
             <h1 style="color: yellow">Yellow Color unlocked</h1>
-            <p>Your jump height is increased</p>
-            <button onclick="Handle2('c3')"> ok</button>
+            <p>You can use `Shift` to dash now .</p>
+            <button onclick="Off('c3')">ok (E)</button>
         </div>
         <div id="c4" class="p">
             <h1 style="color: green">Green Color unlocked</h1>
-            <p>You can use `Shift` to dash now .</p>
-            <button onclick="Handle2('c4')"> ok</button>
+            <p>Your jump height is increased</p>
+
+            <button onclick="Off('c4')">ok (E)</button>
         </div>
         <div id="c5" class="p">
             <h1 style="color: rgb(58, 152, 254)">Blue Color unlocked</h1>
             <p>You can double jump now.</p>
-            <button onclick="Handle2('c5')"> ok</button>
+            <button onclick="Off('c5')">ok (E)</button>
         </div>
         <div id="c6" class="p">
             <h1 style="color: rgb(30, 6, 182)">Indigo Color unlocked</h1>
             <p>You can jump on water.</p>
-            <button onclick="Handle2('c6')"> ok</button>
+            <button onclick="Off('c6')">ok (E)</button>
         </div>
+        
     </body>
 </html>

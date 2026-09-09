@@ -1,4 +1,6 @@
-class PhysicsSystem {
+import { BBC, conf } from "./engine";
+
+export class PhysicsSystem {
     overlapOffset = 1;
     constructor() {
         this.objs = [];
@@ -50,7 +52,6 @@ class PhysicsSystem {
             o.x += overlap[0];
             o.y += overlap[1];
 
-            // this.BoundColl(o);
         }
     }
     TryColl(o) {

@@ -1,4 +1,4 @@
-function Tween({
+export function Tween({
   from = 0,
   to = 1,
   duration = 1000,
