@@ -26,7 +26,14 @@ Minify(true)
         if (fs.existsSync(filePath)) {
             const size = zipFile(filePath, zipPath);
             console.log(`===== ZIP success: ${zipPath}`);
-            console.log(`===== ZIP size: ${(size / 1024).toFixed(1)}KB`);
+            console.log(`===== ZIP size: ${(size / 1024).toFixed(1)}KB || ${size} Bytes `);
+            if(size <= 13312){
+                console.log("===== Size is save");
+            }else{
+                console.log(`===== Size is too large, you need to lesser ${size - 13312} Bytes`);
+                
+            }
+
         } else {
             console.error(`--- File not found: ${filePath}`);
         }

@@ -48,12 +48,6 @@ function CreateGround(x, y, w, h, color = "#ae1414") {
     ground.size = [w, h];
     ground.collSize = [w, h];
     physics.Register(ground, {
-        mass: 999,
-        bounce: 0,
-        friction: 0.5,
-        gravity: 0,
-        isStatic: true,
-        maxSpeed: 0,
     });
     return ground;
 }
@@ -171,23 +165,24 @@ function SpawnPlatforms() {
 }
 
 const grounds = [];
+let a = "#000";
 
-grounds.push(CreateGround(0, 300, 500, 400, "#000"));
-grounds.push(CreateGround(800, 300, 300, 400, "#000"));
-grounds.push(CreateGround(800, -200, 100, 10, "#000"));
-grounds.push(CreateGround(-480, 300, 500, 700, "#000"));
-grounds.push(CreateGround(1850, 300, 500, 400, "#000"));
-grounds.push(CreateGround(2050, -300, 100, 50, "#000"));
-grounds.push(CreateGround(2300, -300, 400, 10000, "#000"));
-grounds.push(CreateGround(0, -400, 100, 10, "#000"));
-grounds.push(CreateGround(-200, -800, 20, 1000, "#000"));
+grounds.push(CreateGround(0, 300, 500, 400, a));
+grounds.push(CreateGround(800, 300, 300, 400, a));
+grounds.push(CreateGround(800, -200, 100, 10, a));
+grounds.push(CreateGround(-480, 300, 500, 700, a));
+grounds.push(CreateGround(1850, 300, 500, 400, a));
+grounds.push(CreateGround(2050, -300, 100, 50, a));
+grounds.push(CreateGround(2300, -300, 400, 10000, a));
+grounds.push(CreateGround(0, -400, 100, 10, a));
+grounds.push(CreateGround(-200, -800, 20, 1000, a));
+grounds.push(CreateGround(-1100, -400, 200, 1000, a));
+grounds.push(CreateGround(-1700, -700, 200, 1600, a));
+grounds.push(CreateGround(-1400, -0, 600, 50, a));
+grounds.push(CreateGround(-3000, -0, 200, 50, a));
+grounds.push(CreateGround(-3500, -300, 400, 10000, a));
 new Arrow(-100, -400);
-grounds.push(CreateGround(-1100, -400, 200, 1000, "#000"));
-grounds.push(CreateGround(-1700, -700, 200, 1600, "#000"));
-grounds.push(CreateGround(-1400, -0, 600, 50, "#000"));
 new Arrow2(-1850, -1550);
-grounds.push(CreateGround(-3000, -0, 200, 50, "#000"));
-grounds.push(CreateGround(-3500, -300, 400, 10000, "#000"));
 
 new Arrow2(500, -470);
 new Arrow2(900, -470);
@@ -217,7 +212,7 @@ function GetPickup(num) {
         green.Remove();
         grounds.map((i) => (i.color = "#157b30"));
 
-        player.jumpHeight = -40;
+        player.jumpHeight = -45;
         Show("c4");
     }
     if (num == 5 && !gameStatus.lightblue) {
@@ -291,7 +286,7 @@ class Player extends Obj {
             this.a = (this.a + 1) % this.animTarget;
         }, this.animInterval);
     }
-    Update() {
+    Update(deltaTime) {
         const s = conf.pressed;
         const k = conf.keys;
         let p = 0;
@@ -304,7 +299,7 @@ class Player extends Obj {
         }
 
         if (k["space"] == 1) {
-            this.Jump();
+            this.Jump(false, deltaTime);
         }
         if (k["r"] == 1) {
             if (this.isFall) {
@@ -322,7 +317,7 @@ class Player extends Obj {
             camera.y = 0;
         }
         if (k["shift"] == 1) {
-            this.Dash(p);
+            this.Dash(p, deltaTime);
         }
         camera.x = this.x;
         playerReset.x = this.x;
@@ -378,7 +373,7 @@ class Player extends Obj {
             GetPickup(7);
         }
     }
-    Jump(force = false) {
+    Jump(force, deltaTime = 1 / 60) {
         if (!this.isGround && !force) {
             this.DoubleJump(force);
             return;
@@ -393,7 +388,7 @@ class Player extends Obj {
             onUpdate: (y) => {
                 this.vy = this.jumpHeight * y;
             },
-            duration: 300,
+            duration: 300 + (60 - 1 / deltaTime),
         });
     }
     DoubleJump() {
@@ -412,7 +407,7 @@ class Player extends Obj {
             duration: 300,
         });
     }
-    Dash(p) {
+    Dash(p, deltaTime) {
         if (!this.canDash) {
             return;
         }
@@ -424,7 +419,7 @@ class Player extends Obj {
             onUpdate: (y) => {
                 this.vx = 100 * y * p;
             },
-            duration: 300,
+            duration: 300 + (60 - 1 / deltaTime),
             onComplete: () => {
                 this.isDash = false;
             },
@@ -453,7 +448,6 @@ physics.Register(purple, false);
 
 physics.Register(player, {
     mass: 1,
-    bounce: 0,
     friction: 0.9,
     gravity: 1,
     isStatic: false,

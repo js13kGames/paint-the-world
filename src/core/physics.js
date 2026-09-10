@@ -11,7 +11,6 @@ export class PhysicsSystem {
         if (conf) {
             let m = conf;
             o.mass = m.mass || 1;
-            o.bounce = m.bounce || 0;
             o.friction = m.friction || 0.5;
             o.gravity = m.gravity || 0;
             o.isStatic = m.isStatic || false;
@@ -116,35 +115,7 @@ export class PhysicsSystem {
         return res;
     }
 
-    BoundColl(o) {
-        let halfSize = o.collSize / 2;
-        let radius = o.collType === "circle" ? o.collSize : halfSize;
-
-        if (o.x - radius < 0) {
-            o.x = radius;
-            o.vx = -o.vx * o.bounce;
-        }
-
-        if (o.x + radius > conf.w) {
-            o.x = conf.w - radius;
-            o.vx = -o.vx * o.bounce;
-        }
-
-        if (o.y - radius < 0) {
-            o.y = radius;
-            o.vy = -o.vy * o.bounce;
-        }
-
-        if (o.y + radius > conf.h) {
-            o.y = conf.h - radius;
-            o.vy = -o.vy * o.bounce;
-
-            if (Math.abs(o.vy) < 0.5) {
-                o.vy = 0;
-            }
-        }
-    }
-
+    
     ClampSpeed() {
         for (let o of this.objs) {
             if (o.isStatic || o.rem) continue;

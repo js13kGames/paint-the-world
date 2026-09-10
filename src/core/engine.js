@@ -68,7 +68,6 @@ export class Obj {
     vx = 0;
     vy = 0;
     mass = 1;
-    bounce = 0.5;
     friction = 0.98;
     gravity = 0;
     isStatic = false;
@@ -142,7 +141,7 @@ export class Obj {
         this.rem = true;
         clearInterval(this.interval);
     }
-    After() {}
+    
 }
 export function BBC(a, b) {
     let halfA = a.collSize;

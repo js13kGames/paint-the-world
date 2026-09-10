@@ -45,9 +45,9 @@ export async function Minify(log = false) {
         compress: {
             drop_console: log,
             drop_debugger: log,
-            passes: 2,
+            passes: log ? 2 : 0,
         },
-        mangle: {
+        mangle: log?{
             toplevel: true,
             reserved: [
                 "H1",
@@ -65,7 +65,7 @@ export async function Minify(log = false) {
                 regex: /.*/,
                 reserved: ["space", "enter", "shift", "ctrl", "alt"],
             },
-        },
+        }:false,
         format: {
             comments: false,
             beautify: false,

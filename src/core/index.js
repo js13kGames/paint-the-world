@@ -4,10 +4,7 @@ function Init() {
     AlignWindow();
 
     document.addEventListener("keydown", (e) => {
-
-
         let name = e.key.toLowerCase();
-
 
         if (e.key == " ") {
             name = "space";
@@ -29,27 +26,42 @@ function Init() {
 
 export let physics = new PhysicsSystem();
 
-function Update() {
+let pre = 0;
+const frameTarget = 1 / 60;
+let counter = 0;
+
+function Update(current) {
+    let deltaTime = (current - pre) / 1000;
+    pre = current;
+    if (deltaTime > 0.25) {
+        deltaTime = 0.25;
+    }
+    counter += deltaTime;
+    let a = 0;
+    while (counter > frameTarget) {
+        a++;
+        counter -= frameTarget;
+        physics.Update(deltaTime);
+    }
+
     if (!conf.pause) {
         Clear();
-        physics.Update();
+
         let s = [...conf.objs];
         s.map((i) => {
-            i.Update();
+            i.Update(deltaTime);
         });
         s.map((i) => {
-            i.After();
-        });
-        s.map((i) => {
-            i.Render();
+            i.Render(deltaTime);
         });
         conf.keys = {};
         conf.objs = conf.objs.filter((o) => !o.rem);
     }
+
     requestAnimationFrame(Update);
 }
 
 export function Start() {
     Init();
-    Update();
+    requestAnimationFrame(Update);
 }

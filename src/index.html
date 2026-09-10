@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
         <title>rainbow</title>
         <link
             rel="icon"
@@ -78,17 +77,28 @@
                 justify-content: center;
                 align-items: center;
             }
+            #a{
+                position: fixed;
+                background-color: black;
+                color: white;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 40px;
+            }
         </style>
     </head>
     <body style="margin: 0">
         <canvas width="640" height="360" id="c"></canvas>
         <div id="fail" class="p">
-            <h1>😢 You Failed</h1>
+            <h1> You Failed</h1>
             <button onclick="PlayerReset()">Try Again (R)</button>
         </div>
 
         <div id="complete" class="p">
-            <h1>🌈 Congratulations</h1>
+            <h1> Congratulations</h1>
             <p>You've brought vibrant colors to this world.</p>
             <p>
                 <strong>The world is radiant because of you</strong> — now you
@@ -128,6 +138,9 @@
             <h1 style="color: rgb(30, 6, 182)">Indigo Color unlocked</h1>
             <p>You can jump on water.</p>
             <button onclick="Off('c6')">ok (E)</button>
+        </div>
+        <div id="a" onclick="this.style.display='none'">
+            Click to start
         </div>
     </body>
 </html>
